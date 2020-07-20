@@ -57,7 +57,7 @@ def SharedDeepBindwithShape(shape1=None, shape2=None, params=None, penalty=0.005
     print model.summary()
     return model
 
-###
+###CRPT only using DNA sequences 
 def SharedDeepBindwithShape(shape1=None, params=None, penalty=0.005):
     digit_input = Input(shape=shape1)
     print digit_input.shape
