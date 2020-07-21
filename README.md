@@ -8,6 +8,7 @@ CRPTS: Predicting Transcription Factor Binding Sites using DNA Shape Features Ba
 # Setting up
    Clone the repositopry into your working space.
 # Data preparation
+ Download the data from https://bitbucket.org/wenxiu/sequence-shape/get/2159e4ef25be.zip
  Firstly, using encode.sh script to preprocess DNA sequences and their corresponding shape features.
    * Usage: bash encode.sh <pbmdata>
    * 'pbmdata' denotes the path of storing experimental data, e.g. /yourpath/pbmdata.
