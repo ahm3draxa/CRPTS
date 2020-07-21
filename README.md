@@ -1,4 +1,4 @@
-  #CRPTS
+  # CRPTS
 CRPTS: Predicting Transcription Factor Binding Sites using DNA Shape Features Based on Shared Hybrid Deep Learning Architecture>
 #Requirements
   *To install Keras with Tensorflow backend, please refer to https://keras.io/#installation.
