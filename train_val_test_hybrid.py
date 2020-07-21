@@ -10,7 +10,7 @@ from keras.optimizers import SGD
 from keras.models import load_model
 from sklearn import preprocessing
 from sklearn.preprocessing import Normalizer
-from models import SharedDeepBindwithShape, SharedDeepCNNwithShape,DeepBindwithShape
+from models import SharedDeepBindwithShape, Sharedmodelsequence
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
@@ -109,9 +109,9 @@ def main():
                print >> f_params, "the {}-th paramter setting of the {}-th fold is {}".format(params_num, fold, params)
                
                print 'Building model...'
-               if args.model == 'deep':
-                  model = SharedDeepCNNwithShape(input_shape1, input_shape2, params)
-               elif args.model == 'shallow':
+               if args.model == 'CRPT':
+                  model = Sharedmodelsequence(input_shape1, input_shape2, params)
+               elif args.model == 'CRPTS':
                   # model = DeepBindwithShape(input_shape1, input_shape2, params)
                   model = SharedDeepBindwithShape(input_shape1, input_shape2, params)
                else:
