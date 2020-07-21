@@ -17,6 +17,6 @@ CRPTS: Predicting Transcription Factor Binding Sites using DNA Shape Features Ba
    * The command '-run' means 'shape' using four shape features, and the command '-model' can be a choice of {'CRPTS', 'CRPT'}
    * Note that you should change the ouput path in the run.sh script, the naming rule is: 'model_' + args.model + '_' + args.run.
 * Type the following for details on other optional arguments: 
-    python train_val_test_hybrid.py -h
+    ```python train_val_test_hybrid.py -h```
  # Contact
  * If you have any problems, please contact SiguoWang: siguo_wang@163.com
