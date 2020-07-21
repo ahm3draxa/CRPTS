@@ -110,7 +110,7 @@ def main():
                
                print 'Building model...'
                if args.model == 'CRPT':
-                  model = Sharedmodelsequence(input_shape1, input_shape2, params)
+                  model = Sharedmodelsequence(input_shape1, params)
                elif args.model == 'CRPTS':
                   # model = DeepBindwithShape(input_shape1, input_shape2, params)
                   model = SharedDeepBindwithShape(input_shape1, input_shape2, params)
