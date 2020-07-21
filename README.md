@@ -19,4 +19,4 @@ CRPTS: Predicting Transcription Factor Binding Sites using DNA Shape Features Ba
     python train_val_test_hybrid.py -h
  # Contact
  * If you have any problems, please contact SiguoWang: siguo_wang@163.com
-  ewg * If you have any problems, please contact SiguoWang: siguo_wang@163.com
+    ewg * If you have any problems, please contact SiguoWang: siguo_wang@163.com
