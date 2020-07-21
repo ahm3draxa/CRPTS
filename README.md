@@ -4,6 +4,8 @@ CRPTS: Predicting Transcription Factor Binding Sites using DNA Shape Features Ba
   * To install Keras with Tensorflow backend, please refer to https://keras.io/#installation.
   * Tensorflow=1.2, keras=2.0
   * Python 2.7
+	def
+  	
 # Setting up
    Clone the repositopry into your working space.
 # Data preparation
