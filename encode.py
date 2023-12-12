@@ -504,7 +504,7 @@ if __name__ == "__main__":
     for line in lines:
         line_split = line.strip().split()
         if len(line_split[1]) != 35:
-            print line_split[1]
+            print (line_split[1])
             continue
         else:
             seqs.append(line_split[1])
