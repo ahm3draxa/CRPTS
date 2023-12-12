@@ -35,18 +35,18 @@ def parse_args():
 def main():
 
     file_path = dirname(abspath(__file__))
-    print file_path
+    print (file_path)
     args = parse_args()
-    print args
+    print (args)
     
     # print the current dataset name
     name = (args.datadir).split('/')[-2]
-    print name
-    print 'working on %s now' % name
+    print (name)
+    print ('working on %s now' % name)
     
     # convert raw data 
     if args.run == 'shape':
-       print 'using DNA sequences and MPRH shape features.'
+       print ('using DNA sequences and MPRH shape features.')
        seq_path_train = args.datadir + '/train.hdf5'
        shape_path_train = args.datadir + '/train_MPRH.hdf5'
        with h5py.File(seq_path_train, 'r') as f1, h5py.File(shape_path_train, 'r') as f2:
@@ -60,10 +60,10 @@ def main():
            for i in range(shape_data_train.shape[0]):
                shape_data_train[i,:,:] = (shape_data_train[i,:,:]-np.mean(shape_data_train[i,:,:]))/np.std(shape_data_train[i,:,:])
            seqs_num = seqs_data_train.shape[0]; seqs_len = seqs_data_train.shape[1]; seqs_dim = seqs_data_train.shape[2]
-           print 'there are %d seqences, each of which is a %d*%d array' %(seqs_num, seqs_len, seqs_dim)
+           print ('there are %d seqences, each of which is a %d*%d array' %(seqs_num, seqs_len, seqs_dim))
            input_shape1 = (seqs_len, seqs_dim)
            shape_num = shape_data_train.shape[0]; shape_len = shape_data_train.shape[1]; shape_dim = shape_data_train.shape[2]
-           print 'there are %d shape sequences, each of which is a %d*%d array' %(shape_num, shape_len, shape_dim)
+           print ('there are %d shape sequences, each of which is a %d*%d array' %(shape_num, shape_len, shape_dim))
            input_shape2 = (shape_len, shape_dim)
 
 
@@ -85,7 +85,7 @@ def main():
     PCC = [];R2 = []
     model_name = 'model_' + args.run
     if not exists(file_path + '/%s/%s' % (model_name, name)):
-       print 'Building ' + file_path + '/%s/%s' % (model_name, name)
+       print ('Building ' + file_path + '/%s/%s' % (model_name, name))
        os.makedirs(file_path + '/%s/%s' % (model_name, name))
     f_params = open(file_path + '/%s/%s/params.txt' % (model_name, name), 'w')
     for fold in range(args.k_folds):
@@ -108,7 +108,7 @@ def main():
                params = RandomSample()
                print >> f_params, "the {}-th paramter setting of the {}-th fold is {}".format(params_num, fold, params)
                
-               print 'Building model...'
+               print ('Building model...')
                if args.model == 'CRPT':
                   model = Sharedmodelsequence(input_shape1, params)
                elif args.model == 'CRPTS':
@@ -122,7 +122,7 @@ def main():
                                                 monitor='val_loss', verbose=1, save_best_only=True)
                earlystopper = EarlyStopping(monitor='val_loss', patience=15, verbose=1)
 
-               print 'Training model...'
+               print ('Training model...')
                myoptimizer = Adadelta(epsilon=params['DELTA'], rho=params['MOMENT'])
                # myoptimizer = Adamax(epsilon=params['DELTA1'], beta_1=params['MOMENT1'],beta_2=params['MOMENT11'])
                # myoptimizer = SGD(learning_rate=params['DELTA2'], momentum=params['MOMENT2'],nesterov= False)
@@ -137,11 +137,11 @@ def main():
                           file_path + '/%s/%s/figure_%dfold.png' % (model_name, name, fold), fold, 'val_loss')
         print >> f_params, "\n\n"
         f_params.flush()  
-        print 'Testing model...'
+        print ('Testing model...')
         # load_model('')
         model.load_weights(file_path + '/%s/%s/params%d_bestmodel_%dfold.hdf5' % (model_name, name, best_num, fold))
         results = model.evaluate([x_test, shape_test], [y_test])
-        print results
+        print (results)
         y_pred = model.predict([x_test, shape_test], batch_size=args.batchsize, verbose=1)
         y_pred = np.asarray([y[0] for y in y_pred])
         y_real = np.asarray([y[0] for y in y_test])
@@ -150,13 +150,13 @@ def main():
            for i in range(len(y_pred)):
                print >> f, '{:.4f} {}'.format(y_pred[i], y_real[i])
 
-        print 'Calculating R2...'
+        print ('Calculating R2...')
         pcc, r2 = ComputePCC(y_pred, y_real)
         PCC.append(pcc)
         R2.append(r2)
        
     f_params.close()
-    print "the mean R2 is {}. the mean PCC is {}".format(np.mean(R2),np.mean(PCC))
+    print ("the mean R2 is {}. the mean PCC is {}".format(np.mean(R2),np.mean(PCC)))
     outfile = file_path + '/%s/%s/metrics.txt' % (model_name, name)
     with open(outfile,'w') as f:
         for i in range(len(R2)):
