@@ -2,7 +2,7 @@
 from keras.models import Sequential, Model
 from keras.layers import Convolution1D, MaxPooling1D, GlobalMaxPooling1D, Dense, Dropout, Flatten, Input, concatenate, Add,  BatchNormalization, Activation, Bidirectional, LSTM, GRU,TimeDistributed,AveragePooling1D,GlobalAveragePooling1D
 from keras import regularizers
-from keras.engine.topology import Layer, InputSpec
+from tensorflow.keras.layers import Layer, InputSpec
 from keras import initializers
 from keras import backend as K
 
@@ -17,14 +17,14 @@ def DeepBind_K(shape = None, params = None, penalty = 0.005):
     model.add(Dropout(params['DROPOUT']))
     model.add(Dense(units=1))
     
-    print model.summary()
+    print (model.summary())
     return model
 
 
 ## shared hybrid model--CRPTS using DNA sequences and DNA shape features
 def SharedDeepBindwithShape(shape1=None, shape2=None, params=None, penalty=0.005):
     digit_input = Input(shape=shape1)
-    print digit_input.shape
+    print (digit_input.shape)
     X = Convolution1D(16, 13, activation='relu', padding='same')(digit_input)
 
 
@@ -54,13 +54,13 @@ def SharedDeepBindwithShape(shape1=None, shape2=None, params=None, penalty=0.005
     output = Dense(1)(Y)
 
     model = Model(inputs=[main_input, auxiliary_input], outputs=output)
-    print model.summary()
+    print (model.summary())
     return model
 
 ###CRPT only using DNA sequences 
 def Sharedmodelsequence(shape1=None, params=None, penalty=0.005):
     digit_input = Input(shape=shape1)
-    print digit_input.shape
+    print (digit_input.shape)
     X = Convolution1D(16, 13, activation='relu', padding='same')(digit_input)
 
 
@@ -81,7 +81,7 @@ def Sharedmodelsequence(shape1=None, params=None, penalty=0.005):
     output = Dense(1)(Y)
 
     model = Model(inputs= main_input, outputs=output)
-    print model.summary()
+    print (model.summary())
     return model
 
 
@@ -102,7 +102,7 @@ def Sharedmodelsequence(shape1=None, params=None, penalty=0.005):
 #     output = Dense(1)(output)
 #
 #     model = Model(inputs=[main_input, auxiliary_input], outputs=output)
-#     print model.summary()
+#     print (model.summary())
 #     return model
  
 # build other models
@@ -120,7 +120,7 @@ def DeepCNN(shape = None, params = None, penalty = 0.005):
     model.add(Dropout(params['DROPOUT']))
     model.add(Dense(1))
     
-    print model.summary()
+    print (model.summary())
     return model
 
 
