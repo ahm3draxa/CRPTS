@@ -106,7 +106,7 @@ def main():
            for params_num in range(args.params):
            #for params_num in range(2):
                params = RandomSample()
-               print >> f_params, "the {}-th paramter setting of the {}-th fold is {}".format(params_num, fold, params)
+               print("the {}-th paramter setting of the {}-th fold is {}".format(params_num, fold, params), file=f_params)
                
                print ('Building model...')
                if args.model == 'CRPT':
